@@ -12,8 +12,14 @@ provider "azurerm" {
   subscription_id = "5b3707b0-d5ff-40ce-8046-9a652b2009ce"
 }
 
-resource "azurerm_resource_group" "this" {
-  name     = var.resource_group_name
-  location = var.location
-  tags     = var.tags
+module "rg" {
+  source  = "Kavana1210/resource-group/azurerm"
+  version = "1.0.0"
+
+  resource_group_name = "demo-rg"
+  location            = "eastus"
+  tags = {
+    owner = "kavana"
+    env   = "lab"
+  }
 }
